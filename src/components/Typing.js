@@ -23,6 +23,8 @@ class Typing extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.reset !== this.props.reset) this.init();
+    if(prevProps.inputDisabled !== this.props.inputDisabled)
+      this.setState({inputDisabled: true})
   }
 
   init = () => {

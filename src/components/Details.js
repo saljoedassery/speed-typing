@@ -5,7 +5,7 @@ import accuracyIcon from "../images/target.svg";
 class Details extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { time: 60 };
+    this.state = { time: 10 };
     this.intervalHandle = null;
   }
 
@@ -21,7 +21,7 @@ class Details extends React.Component {
 
   init = () => {
     this.setState({ time: 60 });
-    clearInterval(this.intervalHandle);
+    this.stopCountDown()
   };
 
   tick = () => {
@@ -29,7 +29,8 @@ class Details extends React.Component {
     var time = this.state.time - 1;
     if (time <= 0) {
       console.log("Time up");
-      clearInterval(this.intervalHandle);
+      this.stopCountDown()
+      this.timeUp()
     }
     if (time < 10) {
       time = "0" + time;
@@ -44,6 +45,12 @@ class Details extends React.Component {
   stopCountDown = () => {
     clearInterval(this.intervalHandle);
   };
+
+  timeUp = () => {
+    // call the parent method calculate the final result
+    console.log("Game finished")
+    this.props.timeUp()
+  }
 
   render() {
     return (
