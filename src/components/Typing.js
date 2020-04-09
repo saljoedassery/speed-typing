@@ -24,11 +24,12 @@ class Typing extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.reset !== this.props.reset) this.init();
     if(prevProps.inputDisabled !== this.props.inputDisabled)
-      this.setState({inputDisabled: true})
+      this.findResult()
   }
 
   init = () => {
     this.timerRunning = false;
+    this.correctWords = 0
     var wordsList = this.props.text.split(" ");
     var status = [];
     for (var i = 0; i < wordsList.length; i++) {
@@ -57,19 +58,25 @@ class Typing extends React.Component {
   };
 
   findResult = () => {
+    console.log("find result called")
     this.setWordCount(this.correctWords);
     this.setState({inputDisabled: true})
-    //stop the time
-    this.setStarted()
     //find the speed and accuracy
+    var totalLettersTyped = this.state.currentActiveLetter
+    var correctLetters = (this.state.letterStatus.join("").match(/letter-valid/g) || []).length
+    this.props.findResult(totalLettersTyped, totalLettersTyped - correctLetters)
   };
 
   setWordCount = (correct) => {
-    this.props.setWordCount(correct, this.state.wordsList.length - correct);
+    this.props.setWordCount(correct, this.state.currentActiveWord - correct);
   };
 
   setStarted = () => {
     this.props.setStarted();
+    const promise = new Promise(function(resolve, reject) {
+      resolve('Success!');
+    });
+    return promise
   };
 
   onChange = (event) => {
@@ -130,11 +137,17 @@ class Typing extends React.Component {
           this.correctWords += 1;
         }
         if (wordsList.length <= currentActiveWord) {
-          this.findResult();
+          currentActiveLetter -= 1
+          letterStatus[currentActiveLetter] = "letter-inactive";
+          this.setStarted().then(()=>
+            this.findResult()
+          )
         }
 
         inputValue = "";
       }
+
+      
 
       this.setState({
         currentActiveLetter: currentActiveLetter,
@@ -217,6 +230,7 @@ class Typing extends React.Component {
             value={this.state.inputValue}
             onChange={this.onChange}
             disabled={this.state.inputDisabled}
+            placeholder="Start typing..."
           />
         </div>
       </div>

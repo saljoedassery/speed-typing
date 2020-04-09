@@ -5,23 +5,26 @@ import accuracyIcon from "../images/target.svg";
 class Details extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { time: 10 };
+    this.state = { time: 60 };
     this.intervalHandle = null;
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.reset !== this.props.reset) {
       this.init();
-    }
-    if (prevProps.timerRunning !== this.props.timerRunning) {
+    } else if (prevProps.timerRunning !== this.props.timerRunning) {
       if (this.props.timerRunning) this.startCountDown();
-      else this.stopCountDown();
+      else {
+        console.log("Game finished before time is up!!");
+        this.stopCountDown();
+        this.finishGame(10 - this.state.time);
+      }
     }
   }
 
   init = () => {
     this.setState({ time: 60 });
-    this.stopCountDown()
+    this.stopCountDown();
   };
 
   tick = () => {
@@ -29,8 +32,8 @@ class Details extends React.Component {
     var time = this.state.time - 1;
     if (time <= 0) {
       console.log("Time up");
-      this.stopCountDown()
-      this.timeUp()
+      this.stopCountDown();
+      this.timeUp(0);
     }
     if (time < 10) {
       time = "0" + time;
@@ -39,18 +42,22 @@ class Details extends React.Component {
   };
 
   startCountDown = () => {
+    console.log("Countdown started");
     this.intervalHandle = setInterval(this.tick, 1000);
   };
 
   stopCountDown = () => {
+    console.log("stopping countdown");
     clearInterval(this.intervalHandle);
   };
 
   timeUp = () => {
-    // call the parent method calculate the final result
-    console.log("Game finished")
-    this.props.timeUp()
-  }
+    this.props.timeUp();
+  };
+
+  finishGame = (timeInSec) => {
+    this.props.finishGame(timeInSec);
+  };
 
   render() {
     return (
@@ -67,7 +74,8 @@ class Details extends React.Component {
             </span>
 
             <p className="speed-value">
-              0<span>WPM</span>
+              {this.props.wpm}
+              <span>WPM</span>
             </p>
           </div>
 
@@ -78,7 +86,8 @@ class Details extends React.Component {
             </span>
 
             <p className="speed-value">
-              100<span>%</span>
+              {this.props.accuracy}
+              <span>%</span>
             </p>
           </div>
 

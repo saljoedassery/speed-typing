@@ -33,7 +33,7 @@ body {
 
 .header h1 {
   font-weight: 300;
-  font-size: 39px;
+  font-size: 60px;
   letter-spacing: 0.1rem;
 }
 
@@ -62,11 +62,11 @@ body {
 }
 
 .text-area {
-  padding: 10px;
+  padding: 8px;
 }
 
 .text-area p {
-  font-size: 28px;
+  font-size: 27px;
   line-height: 43px;
 }
 
@@ -129,6 +129,10 @@ body {
   border-top: 1px solid black;
   font-size: 28px;
   padding: 10px;
+}
+
+.text-input::placeholder {
+  opacity: 0.5;
 }
 
 /* Details component */
