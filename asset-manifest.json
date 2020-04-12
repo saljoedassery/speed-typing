@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/speed-typing/static/css/main.638757c9.chunk.css",
+    "main.js": "/speed-typing/static/js/main.8a0f2abd.chunk.js",
+    "main.js.map": "/speed-typing/static/js/main.8a0f2abd.chunk.js.map",
+    "runtime-main.js": "/speed-typing/static/js/runtime-main.a1f7b220.js",
+    "runtime-main.js.map": "/speed-typing/static/js/runtime-main.a1f7b220.js.map",
+    "static/js/2.3c37da41.chunk.js": "/speed-typing/static/js/2.3c37da41.chunk.js",
+    "static/js/2.3c37da41.chunk.js.map": "/speed-typing/static/js/2.3c37da41.chunk.js.map",
+    "index.html": "/speed-typing/index.html",
+    "precache-manifest.4d8297e80b59c60267445e51e4bb492c.js": "/speed-typing/precache-manifest.4d8297e80b59c60267445e51e4bb492c.js",
+    "service-worker.js": "/speed-typing/service-worker.js",
+    "static/css/main.638757c9.chunk.css.map": "/speed-typing/static/css/main.638757c9.chunk.css.map",
+    "static/js/2.3c37da41.chunk.js.LICENSE.txt": "/speed-typing/static/js/2.3c37da41.chunk.js.LICENSE.txt",
+    "static/media/speed.svg": "/speed-typing/static/media/speed.1f766eca.svg",
+    "static/media/target.svg": "/speed-typing/static/media/target.a17d4568.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a1f7b220.js",
+    "static/js/2.3c37da41.chunk.js",
+    "static/css/main.638757c9.chunk.css",
+    "static/js/main.8a0f2abd.chunk.js"
+  ]
+}
